@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<script></script>
-<style>
+  <script></script>
+  <style>
     .productCard {
-        width: 200px;
-        height: 150px;
-        box-shadow: 2px 2px 5px black;
+      width: 200px;
+      height: 150px;
+      box-shadow: 2px 2px 5px black;
     }
-</style>
+  </style>
 
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- This is html comment  -->
     {% comment %} {{ product }} {% endcomment %}
 
@@ -23,11 +23,11 @@
     <hr />
     {% for p in product %}
     <div class="productCard">
-        <h1>{{ p.name}}</h1>
-        <h2>containts</h2>
-        {{ p.desc }}
+      <h1>{{ p.name}}</h1>
+      <h2>containts</h2>
+      <h2>containts</h2>
+      {{ p.desc }}
     </div>
     {% endfor %}
-</body>
-
+  </body>
 </html>
