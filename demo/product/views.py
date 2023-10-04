@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
-def product(request):
+from product.models import Product
 
-    return render(request, "prod.html")
+# Create your views here.
+
+
+def product(request):
+    q = Product.objects.all().values()
+    print(q)
+
+    return render(request, "prod.html", context={"product": q})
