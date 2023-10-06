@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            background-color: rgb(225, 225, 225);
+            text-align: center;
+        }
+
+        .card {
+            background-color: white;
+            height: 300px;
+            width: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            box-shadow: 5px 5px 5px gray;
+        }
+
+        .card form {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <form action="productAdd" method="post">
+            {% csrf_token %}
+            <h1>Add Product</h1>
+            <label for="html">Product Name</label>
+            <input type="text" name="name">
+            <label for="html">Description</label>
+            <input type="text" name="desc">
+            <label for="html">Price</label>
+            <input type="number" name="price">
+            <label for="html">Quantity</label>
+            <input type="number" name="quantity">
+            <input type="submit" value="submit" name="submit">
+        </form>
+    </div>
+
+</body>
+
+</html>

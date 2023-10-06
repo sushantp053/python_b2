@@ -43,4 +43,4 @@ class Order(models.Model):
     quantity = models.IntegerField()
     total = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    addr = models.ForeignKey(Address)
+    addr = models.ForeignKey(Address, on_delete=models.CASCADE)
