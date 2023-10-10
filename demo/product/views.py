@@ -18,8 +18,20 @@ def addPage(request):
     return render(request, "addprod.html")
 
 
+def delete(request):
+    if request.method == "GET":
+        data = request.GET
+        pid = data["prodId"]
+        p = Product.objects.get(id=pid)
+        p.delete()
+
+    q = Product.objects.all().values()
+    return render(request, "prod.html", context={"product": q})
+
+
 def productAdd(request):
     if request.method == "GET":
+        print("Get method called")
         data = request.GET
 
         p = Product(name=data["name"], desc=data["desc"],
@@ -28,6 +40,7 @@ def productAdd(request):
         print(data)
 
     if request.method == "POST":
+        print("Post method called")
         data = request.POST
 
         p = Product(name=data["name"], desc=data["desc"],

@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script></script>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
   <style>
-    .productCard {
-      width: 200px;
-      height: 150px;
-      box-shadow: 2px 2px 5px black;
-    }
+
   </style>
+  <link rel="stylesheet" href="/static/product/css/style.css">
+</head>
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<body>
+  <!-- This is html comment  -->
+  {% comment %} {{ product }} {% endcomment %}
 
-  <body>
-    <!-- This is html comment  -->
-    {% comment %} {{ product }} {% endcomment %}
+  <h1>Products Page</h1>
+  <img src="airtel.jpeg" alt="airtel">
+  <hr />
+  {% for p in product %}
+  <div class="productCard">
+    <h1>{{ p.name}}</h1>
+    <h2>containts</h2>
+    <h2>{{ p.quantity }}</h2>
+    {{ p.desc }}
+    <a href="delete?prodId={{p.id}}">
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        Delete
+      </button></a>
+  </div>
+  {% endfor %}
+  <script src="/static/product/main.js"></script>
+</body>
 
-    <h1>Products Page</h1>
-    <hr />
-    {% for p in product %}
-    <div class="productCard">
-      <h1>{{ p.name}}</h1>
-      <h2>containts</h2>
-      <h2>containts</h2>
-      {{ p.desc }}
-    </div>
-    {% endfor %}
-  </body>
 </html>
