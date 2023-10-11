@@ -1,9 +1,42 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from product.models import Product
+from django.contrib.auth.models import User
 
-# Create your views here.
+
+def register(request):
+    if request.method == "POST":
+        print("Post method called")
+        data = request.POST
+
+        firstName = data["firstName"]
+        lastName = data["lastName"]
+        email = data["email"]
+        password = data["password"]
+
+        if (email != "" and password != ""):
+            print("email validated")
+            if (not User.objects.filter(username=email).exists()):
+                print("Email not existed")
+
+                u = User.objects.create(first_name=firstName,
+                                        last_name=lastName,
+                                        username=email,
+                                        email=email)
+                u.set_password(password)
+                u.save()
+                msg = "User has been registerd please login now"
+                return render(request, "login.html")
+            else:
+                print("email exitsted")
+                msg = "User has already registerd!"
+                return render(request, "login.html")
+        else:
+            print("Credintial not found")
+            msg = "All credintials required."
+            return render(request, "register.html")
+    else:
+        return render(request, "register.html")
 
 
 def product(request):

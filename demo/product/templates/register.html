@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+    <h1> Registration </h1>
+    <hr>
+    <div class="card">
+        <form action="register" method="POST">
+            {% csrf_token %}
+            <h1>Registration</h1>
+            <label for="html">First Name</label>
+            <input type="text" name="firstName">
+            <label for="html">Last Name</label>
+            <input type="text" name="lastName">
+            <label for="html">Email</label>
+            <input type="email" name="email">
+            <label for="html">Password</label>
+            <input type="password" name="password">
+            <input type="submit" value="Register" name="submit">
+        </form>
+    </div>
+</body>
+
+</html>

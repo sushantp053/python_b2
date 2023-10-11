@@ -1,0 +1,17 @@
+body {
+  background-color: rgb(225, 225, 225);
+  text-align: center;
+}
+
+.card {
+  background-color: white;
+  height: 300px;
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 5px 5px 5px gray;
+}
+
+.card form {
+  padding: 10px;
+}

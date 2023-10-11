@@ -13,5 +13,6 @@ urlpatterns = [
     path("product", product),
     path("addPage", addPage),
     path("productAdd", productAdd),
-    path("delete", delete)
+    path("delete", delete),
+    path("register", register),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
