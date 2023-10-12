@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from product.models import Product
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
     if request.method == "POST":
-        print("Post method called")
         data = request.POST
 
         firstName = data["firstName"]
@@ -15,7 +16,6 @@ def register(request):
         password = data["password"]
 
         if (email != "" and password != ""):
-            print("email validated")
             if (not User.objects.filter(username=email).exists()):
                 print("Email not existed")
 
@@ -28,17 +28,35 @@ def register(request):
                 msg = "User has been registerd please login now"
                 return render(request, "login.html")
             else:
-                print("email exitsted")
                 msg = "User has already registerd!"
                 return render(request, "login.html")
         else:
-            print("Credintial not found")
             msg = "All credintials required."
             return render(request, "register.html")
     else:
         return render(request, "register.html")
 
 
+def login1(request):
+    if request.method == "POST":
+        data = request.POST
+        email = data['email']
+        password = data['password']
+
+        # u = User.objects.filter(email=email, password=password).exists()
+        user = authenticate(username=email, password=password)
+        if (user != None):
+            print(user)
+            login(request, user)
+            return HttpResponse("User Has been Successfully logged in")
+        else:
+            return HttpResponse("User Crenditials are wrong")
+
+        print(user)
+    return render(request, "login.html")
+
+
+@login_required
 def product(request):
     q = Product.objects.all().values()
     print(q)
@@ -46,11 +64,13 @@ def product(request):
     return render(request, "prod.html", context={"product": q})
 
 
+@login_required
 def addPage(request):
 
     return render(request, "addprod.html")
 
 
+@login_required
 def delete(request):
     if request.method == "GET":
         data = request.GET
