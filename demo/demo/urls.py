@@ -15,5 +15,8 @@ urlpatterns = [
     path("productAdd", productAdd),
     path("delete", delete),
     path("register", register),
-    path("login", login1)
+    path("login", login1),
+    path("logout", logOut),
+    path("addToCart", addToCart),
+    path("cart", cart),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

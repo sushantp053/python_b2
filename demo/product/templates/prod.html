@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+    <link rel="stylesheet" href="/static/product/css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style>
+  <body>
+    <!-- This is html comment  -->
+    {% comment %} {{ product }} {% endcomment %}
+    <nav class="navbar">
+      <div class="logo">
+        <img src="airtel.jpeg" alt="logo" />
+      </div>
+      <div class="logOut">
+        {% if request.user.is_authenticated %}
+        <a href="logout">
+          <button>Logout</button>
+        </a>
+        {% else %}
+        <a href="login">
+          <button>Login</button>
+        </a>
+        {% endif %}
+      </div>
+    </nav>
 
-  </style>
-  <link rel="stylesheet" href="/static/product/css/style.css">
-</head>
-
-<body>
-  <!-- This is html comment  -->
-  {% comment %} {{ product }} {% endcomment %}
-
-  <h1>Products Page</h1>
-  <img src="airtel.jpeg" alt="airtel">
-  <hr />
-  {% for p in product %}
-  <div class="productCard">
-    <h1>{{ p.name}}</h1>
-    <h2>containts</h2>
-    <h2>{{ p.quantity }}</h2>
-    {{ p.desc }}
-    <a href="delete?prodId={{p.id}}">
-      <button type="button" class="btn btn-outline-secondary btn-sm">
-        Delete
-      </button></a>
-  </div>
-  {% endfor %}
-  <script src="/static/product/main.js"></script>
-</body>
-
+    <h1>Products Page</h1>
+    <hr />
+    {% for p in product %}
+    <div class="productCard">
+      <h1>{{ p.name}}</h1>
+      <h2>containts</h2>
+      <h2>{{ p.quantity }}</h2>
+      {{ p.desc }}
+      <a href="delete?prodId={{p.id}}">
+        <button type="button" class="btn btn-outline-secondary btn-sm">
+          Delete
+        </button></a
+      >
+      <a href="addToCart?prodId={{p.id}}">
+        <button type="button" class="btn btn-outline-secondary btn-sm">
+          Add to cart
+        </button></a
+      >
+    </div>
+    {% endfor %}
+    <script src="/static/product/main.js"></script>
+  </body>
 </html>

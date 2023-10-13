@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from product.models import Product
+from product.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -37,6 +37,27 @@ def register(request):
         return render(request, "register.html")
 
 
+def logOut(request):
+    logout(request)
+
+    return render(request, "login.html")
+
+
+def addToCart(request):
+    if request.method == "GET":
+        prodId = request.GET["prodId"]
+
+        p = Product.objects.get(id=prodId)
+
+        Cart.objects.create(product_id=p, price=p.price,
+                            quantity=1,  total=p.price,
+                            user=request.user)
+
+    q = Product.objects.all().values()
+
+    return render(request, "prod.html", context={"product": q})
+
+
 def login1(request):
     if request.method == "POST":
         data = request.POST
@@ -59,6 +80,14 @@ def login1(request):
 @login_required
 def product(request):
     q = Product.objects.all().values()
+    print(q)
+
+    return render(request, "prod.html", context={"product": q})
+
+
+@login_required
+def cart(request):
+    q = Cart.objects.all().values()
     print(q)
 
     return render(request, "prod.html", context={"product": q})
