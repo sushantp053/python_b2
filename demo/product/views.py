@@ -48,6 +48,7 @@ def addToCart(request):
         prodId = request.GET["prodId"]
 
         p = Product.objects.get(id=prodId)
+        print(p)
 
         Cart.objects.create(product_id=p, price=p.price,
                             quantity=1,  total=p.price,
@@ -87,10 +88,24 @@ def product(request):
 
 @login_required
 def cart(request):
-    q = Cart.objects.all().values()
-    print(q)
+    if request.method == "GET":
+        try:
+            prodId = request.GET["prodId"]
+            d = Cart.objects.get(uid=prodId)
+            d.delete()
+        except:
+            print("Error to fetch object")
 
-    return render(request, "prod.html", context={"product": q})
+    q = Cart.objects.filter(user=request.user)
+    sum = 0
+    count = 0
+    for p in q:
+        Product.objects.create
+        p.delete
+        sum = p.price + sum
+        count = p.quantity + count
+
+    return render(request, "cart.html", context={"product": q, "count": count, "sum": sum})
 
 
 @login_required

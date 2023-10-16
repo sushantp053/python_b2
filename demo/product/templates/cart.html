@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+    <link rel="stylesheet" href="/static/cart/css/style.css" />
+  </head>
+
+  <body>
+    <!-- This is html comment  -->
+    {% comment %} {{ product }} {% endcomment %}
+    <nav class="navbar">
+      <div class="logo">
+        <img src="airtel.jpeg" alt="logo" />
+      </div>
+      <div class="logOut">
+        {% if request.user.is_authenticated %}
+        <a href="logout">
+          <button>Logout</button>
+        </a>
+        {% else %}
+        <a href="login">
+          <button>Login</button>
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <h1>Cart Page</h1>
+    {{sum }} {{ count}}
+    <hr />
+    {% for p in product %}
+    <div class="productCard">
+      <h1>{{ p.product_id.name }}</h1>
+      <h3>Price {{ p.price}}</h3>
+      <a href="cart?prodId={{p.uid}},decrement=1">
+        <button type="button" class="btn btn-outline-secondary btn-sm">
+          -
+        </button></a
+      >
+      <h3>Quantity {{ p.quantity }}</h3>
+      <a href="cart?prodId={{p.uid}},increment=1">
+        <button type="button" class="btn btn-outline-secondary btn-sm">
+          +
+        </button></a
+      >
+      <h2>Total {{ p.total }}</h2>
+      {{ p.desc }}
+      <a href="cart?prodId={{p.uid}}">
+        <button type="button" class="btn btn-outline-secondary btn-sm">
+          Remove from cart
+        </button></a
+      >
+    </div>
+    {% endfor %}
+    <script src="/static/product/main.js"></script>
+  </body>
+</html>
