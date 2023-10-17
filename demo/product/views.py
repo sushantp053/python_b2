@@ -87,6 +87,47 @@ def product(request):
 
 
 @login_required
+def address(request):
+    if request.method == "POST":
+        data = request.POST
+        Address.objects.create(name=data["name"], building_name=data["building"],
+                               flat=data["flat"], landmark=data["landmark"],
+                               city=data["city"], pin=data["pin"], mobile=data["mobile"],
+                               user=request.user)
+
+    addr = Address.objects.filter(user=request.user)
+
+    return render(request, "addr.html", context={"address": addr})
+
+
+@login_required
+def addrSelector(request):
+
+    addr = Address.objects.filter(user=request.user)
+
+    return render(request, "addr_selector.html", context={"address": addr})
+
+
+@login_required
+def confirmOrder(request):
+
+    addrid = request.GET["addrid"]
+
+    address = Address.objects.get(uid=addrid)
+
+    cart = Cart.objects.filter(user=request.user)
+
+    for c in cart:
+        print(c)
+        Order.objects.create(product_id=c.product_id, price=c.price,
+                             quantity=c.quantity,  total=c.price,
+                             user=request.user, addr=address)
+        c.delete()
+
+    return HttpResponse("Your orders has been confirmed")
+
+
+@login_required
 def cart(request):
     if request.method == "GET":
         try:

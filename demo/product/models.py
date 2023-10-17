@@ -16,7 +16,8 @@ class Product(models.Model):
 class Address(models.Model):
     uid = models.UUIDField(primary_key=True, unique=True,
                            editable=False, default=uuid.uuid4)
-    building_name = models.TextField()
+    name = models.TextField()
+    building_name = models.TextField(default="")
     flat = models.TextField()
     landmark = models.TextField()
     city = models.TextField()

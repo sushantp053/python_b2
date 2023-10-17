@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product</title>
+    <style>
+      body {
+        background-color: rgb(225, 225, 225);
+      }
+
+      .card {
+        background-color: white;
+        height: 500px;
+        width: 300px;
+        display: block;
+        flex-wrap: wrap;
+        box-shadow: 5px 5px 5px gray;
+      }
+      .addressList {
+        background-color: white;
+        height: 150px;
+        width: 300px;
+        box-shadow: 5px 5px 5px gray;
+      }
+      .card * {
+        display: block;
+      }
+
+      .card form {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <form action="address" method="POST">
+        {% csrf_token %}
+        <h1>Add Address</h1>
+        <label for="html">Full Name</label>
+        <input type="text" name="name" />
+        <label for="html">Flat No / House Name </label>
+        <input type="text" name="flat" />
+        <label for="html">Building Name / Road </label>
+        <input type="text" name="building" />
+        <label for="html">LandMark</label>
+        <input type="text" name="landmark" />
+        <label for="html">City </label>
+        <input type="text" name="city" />
+        <label for="html">Pin No</label>
+        <input type="number" name="pin" />
+        <label for="html">Mobile</label>
+        <input type="number" name="mobile" />
+        <input type="submit" value="Add Address" name="submit" />
+      </form>
+    </div>
+
+    {% for a in address %}
+    <div class="addressList">
+      <h1>{{a.name}}</h1>
+      <h4>{{a.city}}</h4>
+      <h4>{{a.mobile}}</h4>
+    </div>
+    {% endfor %}
+  </body>
+</html>

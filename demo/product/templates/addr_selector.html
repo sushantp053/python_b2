@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product</title>
+    <style>
+      body {
+        background-color: rgb(225, 225, 225);
+      }
+      .addressList {
+        margin-top: 10px;
+        background-color: white;
+        height: 180px;
+        width: 300px;
+        padding: 10px;
+        box-shadow: 5px 5px 5px gray;
+      }
+      .card * {
+        display: block;
+      }
+
+      .card form {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% for a in address %}
+    <div class="addressList">
+      <h1>{{a.name}}</h1>
+      <h4>{{a.city}}</h4>
+      <h4>{{a.mobile}}</h4>
+      <a href="confirm_order?addrid={{a.uid}}">
+        <button>Deliver Here</button></a
+      >
+    </div>
+    {% endfor %}
+  </body>
+</html>

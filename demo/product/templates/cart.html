@@ -29,7 +29,11 @@
     </nav>
 
     <h1>Cart Page</h1>
-    {{sum }} {{ count}}
+    {% if count > 0 %}
+    <a href="addrselector"> <button>Place Order</button></a>
+    {% endif %}
+    <h4>Total Amount {{sum }}</h4>
+    <h4>Total items {{ count}}</h4>
     <hr />
     {% for p in product %}
     <div class="productCard">

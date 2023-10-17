@@ -19,4 +19,7 @@ urlpatterns = [
     path("logout", logOut),
     path("addToCart", addToCart),
     path("cart", cart),
+    path("address", address),
+    path("addrselector", addrSelector),
+    path("confirm_order", confirmOrder)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
